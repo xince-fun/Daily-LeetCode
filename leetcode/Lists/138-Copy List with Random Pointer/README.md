@@ -1,0 +1,14 @@
+
+### 复制
+
+- 先将每个节点都复制一份，放在它的 next 节点中。如此穿插的复制一份链表。
+
+![Alt text](https://camo.githubusercontent.com/c527d4debb5dfc68220b5d93ccd1911af24e98fe1aabe6e3b2dd23da982f46a5/68747470733a2f2f696d672e68616c66726f73742e636f6d2f4c656574636f64652f6c656574636f64655f3133385f315f302e706e67)
+
+再将穿插版的链表的random指针指向正确的位置
+
+![Alt text](https://camo.githubusercontent.com/e045cef71925e4f36b99f8c213f6d251d002d4681e874f5354daf21afc8f2848/68747470733a2f2f696d672e68616c66726f73742e636f6d2f4c656574636f64652f6c656574636f64655f3133385f322e706e67)
+
+再将穿插版的链表的 next 指针指向正确的位置。最后分开这交织在一起的两个链表的头节点，即可分开 2 个链表。
+
+![Alt text](https://camo.githubusercontent.com/7fed202b8ff9b6daea1b955743ca733c1e29a0bb455dbb7efefc7889bf064c59/68747470733a2f2f696d672e68616c66726f73742e636f6d2f4c656574636f64652f6c656574636f64655f3133385f332e706e67)

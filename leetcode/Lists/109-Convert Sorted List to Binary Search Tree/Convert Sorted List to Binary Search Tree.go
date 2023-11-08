@@ -7,7 +7,7 @@ import (
 type ListNode = structure.ListNode
 type TreeNode = structure.TreeNode
 
-func sortedListToBST(head *ListNode) *TreeNode {
+func sortedListToBST1(head *ListNode) *TreeNode {
 	if head == nil {
 		return nil
 	}
@@ -24,7 +24,7 @@ func sortedListToBST(head *ListNode) *TreeNode {
 	if mid == head {
 		head = nil
 	}
-	return &TreeNode{Val: mid.Val, Left: sortedListToBST(head), Right: sortedListToBST(mid.Next)}
+	return &TreeNode{Val: mid.Val, Left: sortedListToBST1(head), Right: sortedListToBST1(mid.Next)}
 }
 
 func midAndPreNode(head *ListNode) (mid *ListNode, pre *ListNode) {
@@ -38,4 +38,24 @@ func midAndPreNode(head *ListNode) (mid *ListNode, pre *ListNode) {
 		p2 = p2.Next.Next
 	}
 	return p1, pre
+}
+
+func sortedListToBST(head *ListNode) *TreeNode {
+	if head == nil {
+		return nil
+	}
+	slow, fast := head, head
+	var pre *ListNode
+	for fast != nil && fast.Next != nil {
+		pre = slow
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	root := &TreeNode{Val: slow.Val}
+	if pre != nil {
+		pre.Next = nil
+		root.Left = sortedListToBST(head)
+	}
+	root.Right = sortedListToBST(slow.Next)
+	return root
 }
