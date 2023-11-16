@@ -89,7 +89,7 @@ func (t *AllOne) Dec(key string) {
 
 func (t *AllOne) GetMaxKey() string {
 	node := t.tail.Prev
-	for k, _ := range node.Set {
+	for k := range node.Set {
 		return k
 	}
 	return ""
@@ -97,7 +97,7 @@ func (t *AllOne) GetMaxKey() string {
 
 func (t *AllOne) GetMinKey() string {
 	node := t.head.Next
-	for k, _ := range node.Set {
+	for k := range node.Set {
 		return k
 	}
 	return ""
