@@ -8,7 +8,7 @@ type TreeNode = structure.TreeNode
 
 var ans int
 
-func diameterOfBinaryTree(root *TreeNode) int {
+func diameterOfBinaryTree1(root *TreeNode) int {
 	ans = 0
 	dfs(root)
 	return ans
@@ -28,4 +28,19 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func diameterOfBinaryTree(root *TreeNode) int {
+	ans := 0
+	var dfs func(*TreeNode) int
+	dfs = func(root *TreeNode) int {
+		if root == nil {
+			return -1
+		}
+		left, right := dfs(root.Left), dfs(root.Right)
+		ans = max(ans, left+right+2)
+		return max(left, right) + 1
+	}
+	dfs(root)
+	return ans
 }

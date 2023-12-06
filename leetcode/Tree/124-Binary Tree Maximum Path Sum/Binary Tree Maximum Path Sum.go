@@ -10,7 +10,7 @@ type TreeNode = structure.TreeNode
 
 var res int
 
-func maxPathSum(root *TreeNode) int {
+func maxPathSum1(root *TreeNode) int {
 	res = math.MinInt32
 	if root == nil {
 		return 0
@@ -36,4 +36,19 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func maxPathSum(root *TreeNode) int {
+	ans := math.MinInt32
+	var dfs func(*TreeNode) int
+	dfs = func(root *TreeNode) int {
+		if root == nil {
+			return 0
+		}
+		left, right := dfs(root.Left), dfs(root.Right)
+		ans = max(ans, left+right+root.Val)
+		return max(max(left, right)+root.Val, 0)
+	}
+	dfs(root)
+	return ans
 }
