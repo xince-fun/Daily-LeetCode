@@ -6,7 +6,7 @@ import (
 
 type ListNode = structure.ListNode
 
-func detectCycle(head *ListNode) *ListNode {
+func detectCycle1(head *ListNode) *ListNode {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
@@ -18,6 +18,22 @@ func detectCycle(head *ListNode) *ListNode {
 				index2 = index2.Next
 			}
 			return index2
+		}
+	}
+	return nil
+}
+
+func detectCycle(head *ListNode) *ListNode {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow == fast {
+			for slow != head {
+				slow = slow.Next
+				head = head.Next
+			}
+			return slow
 		}
 	}
 	return nil

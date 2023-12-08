@@ -6,7 +6,7 @@ import (
 
 type ListNode = structure.ListNode
 
-func reverseKGroup(head *ListNode, k int) *ListNode {
+func reverseKGroup1(head *ListNode, k int) *ListNode {
 	if head == nil {
 		return nil
 	}
@@ -35,6 +35,43 @@ func reverse(a, b *ListNode) *ListNode {
 	return pre
 }
 
-func main() {
+func reverseList2(head *ListNode) *ListNode {
+	var behind *ListNode
+	for head != nil {
+		next := head.Next
+		head.Next = behind
+		behind = head
+		head = next
+	}
+	return behind
+}
 
+func reverseKGroup(head *ListNode, k int) *ListNode {
+	n := 0
+	cur := head
+	for cur != nil {
+		n++
+		cur = cur.Next
+	}
+
+	dummyHead := &ListNode{Next: head}
+	p0 := dummyHead
+
+	for n >= k {
+		n -= k
+		var pre *ListNode
+		cur = p0.Next
+		for i := 0; i < k; i++ {
+			next := cur.Next
+			cur.Next = pre
+			pre = cur
+			cur = next
+		}
+
+		next := p0.Next
+		p0.Next.Next = cur
+		p0.Next = pre
+		p0 = next
+	}
+	return dummyHead.Next
 }

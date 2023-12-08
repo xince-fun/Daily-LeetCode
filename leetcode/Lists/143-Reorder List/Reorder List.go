@@ -38,7 +38,7 @@ func reorderList1(head *ListNode) {
 	}
 }
 
-func reorderList(head *ListNode) {
+func reorderList2(head *ListNode) {
 	if head == nil || head.Next == nil {
 		return
 	}
@@ -61,6 +61,31 @@ func reorderList(head *ListNode) {
 		last.Next = nil
 	} else {
 		cur.Next = nil
+	}
+}
+
+func reorderList(head *ListNode) {
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	var pre *ListNode
+	cur := slow
+	for cur != nil {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+	}
+	// cur 就是 head2
+	for cur.Next != nil {
+		next1 := head.Next
+		next2 := cur.Next
+		head.Next = cur
+		cur.Next = next1
+		head = next1
+		cur = next2
 	}
 }
 

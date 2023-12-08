@@ -6,26 +6,24 @@ import (
 
 type ListNode = structure.ListNode
 
-func hasCycle1(head *ListNode) bool {
+func middleNode1(head *ListNode) *ListNode {
 	slow, fast := head, head
-	for fast != nil && fast.Next != nil {
-		slow = slow.Next
+
+	for fast.Next != nil && fast.Next.Next != nil {
 		fast = fast.Next.Next
-		if slow == fast {
-			return true
-		}
+		slow = slow.Next
 	}
-	return false
+	if fast.Next != nil {
+		return slow.Next
+	}
+	return slow
 }
 
-func hasCycle(head *ListNode) bool {
+func middleNode(head *ListNode) *ListNode {
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
-		slow = slow.Next
 		fast = fast.Next.Next
-		if slow == fast {
-			return true
-		}
+		slow = slow.Next
 	}
-	return false
+	return slow
 }
