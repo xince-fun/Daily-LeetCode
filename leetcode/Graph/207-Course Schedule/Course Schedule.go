@@ -40,7 +40,7 @@ func canFinish1(numCourses int, prerequisites [][]int) bool {
 	return count == numCourses
 }
 
-func canFinish(numCourses int, prerequisites [][]int) bool {
+func canFinish2(numCourses int, prerequisites [][]int) bool {
 	if len(prerequisites) == 0 {
 		return true
 	}
@@ -83,4 +83,37 @@ func canFinish(numCourses int, prerequisites [][]int) bool {
 		}
 	}
 	return true
+}
+
+func canFinish(numCourses int, prerequisites [][]int) bool {
+	// 记录入度和出度
+	in, out := make([]int, numCourses), make([][]int, numCourses)
+	for _, p := range prerequisites {
+		out[p[1]] = append(out[p[1]], p[0])
+		in[p[0]]++
+	}
+	queue := make([]int, 0)
+
+	// 入度为0的都进去
+	for i := range in {
+		if in[i] == 0 {
+			queue = append(queue, i)
+		}
+	}
+	count := 0
+	for len(queue) > 0 {
+		length := len(queue)
+		for i := 0; i < length; i++ {
+			count++
+			course := queue[0]
+			queue = queue[1:]
+			for _, o := range out[course] {
+				in[o]--
+				if in[o] == 0 {
+					queue = append(queue, o)
+				}
+			}
+		}
+	}
+	return count == numCourses
 }
