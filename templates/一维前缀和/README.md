@@ -7,9 +7,11 @@
 例如 $nums=[1,2,-1,2]$，对应的前缀和数组为 $s=[0,1,3,2,4]$。
 
 通过前缀和，我们可以把子数组的元素和转换成两个前缀和的差，即
+
 $$
 \sum\limits_{j=left}^{right}nums[j]=\sum\limits_{j=0}^{right}nums[j]-\sum\limits_{j=0}^{left-1}nums[j]=s[right+1]-s[left]
 $$
+
 例如，$nums$的子数组 $[2,-1,2]$ 的和就可以用 $s[4]-s[1]=4-1=3$算出来。
 
 > 注：为方便计算，常用左闭右开区间$[left,right)$来表示从$nums[left]$到$nums[right-1]$的子数组，此时子数组的和为$s[right]-s[left]$，子数组的长度为 $right-left$。
