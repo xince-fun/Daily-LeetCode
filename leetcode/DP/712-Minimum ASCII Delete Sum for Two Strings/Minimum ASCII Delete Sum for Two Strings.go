@@ -1,7 +1,7 @@
 package main
 
 //			   dfs(i-1,j-1) s[i] == t[j]
-// dfs(i,j) =
+// dfs(i,j) =  min(dfs(i-1, j)+int(s[i]), dfs(i, j-1)+int(t[i]))
 
 func sum(str string) (ans int) {
 	for _, s := range str {
