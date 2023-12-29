@@ -1,6 +1,6 @@
 package main
 
-func numSubarrayProductLessThanK(nums []int, k int) int {
+func numSubarrayProductLessThanK1(nums []int, k int) int {
 	ans, n := 0, len(nums)
 	left, right := 0, 0
 	product := 1
@@ -15,6 +15,22 @@ func numSubarrayProductLessThanK(nums []int, k int) int {
 			product /= nums[left]
 			left++
 		}
+	}
+	return ans
+}
+
+func numSubarrayProductLessThanK(nums []int, k int) int {
+	ans := 0
+
+	left, product := 0, 1
+
+	for right, x := range nums {
+		product *= x
+		for product >= k {
+			product /= nums[left]
+			left++
+		}
+		ans += right - left + 1
 	}
 	return ans
 }
