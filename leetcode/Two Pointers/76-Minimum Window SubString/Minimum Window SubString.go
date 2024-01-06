@@ -1,6 +1,8 @@
 package main
 
-import "math"
+import (
+	"math"
+)
 
 func minWindow(s string, t string) (ans string) {
 	left := 0
@@ -10,32 +12,24 @@ func minWindow(s string, t string) (ans string) {
 		m[c]++
 	}
 	for right, c := range s {
-		if _, exists := m[c]; exists {
-			m[c]--
-		}
-		isFound := true
-		for _, v := range m {
-			if v != 0 {
-				isFound = false
-				break
+		m[c]--
+		for check(m) {
+			if right-left+1 < minLen {
+				minLen = right - left + 1
+				ans = s[left : right+1]
 			}
-		}
-		if isFound {
-			len := right - left + 1
-			if len < minLen {
-				minLen = len
-				temp := append([]byte(nil), s[left:right+1]...)
-				ans = string(temp)
-			}
-			// 开始缩小
-			for left <= right {
-				char := s[left]
-				if _, exists := m[rune(char)]; exists {
-					m[rune(char)]++
-				}
-				left++
-			}
+			m[rune(s[left])]++
+			left++
 		}
 	}
 	return ans
+}
+
+func check(m map[rune]int) bool {
+	for _, v := range m {
+		if v > 0 {
+			return false
+		}
+	}
+	return true
 }
