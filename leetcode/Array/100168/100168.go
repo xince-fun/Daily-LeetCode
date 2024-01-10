@@ -1,6 +1,8 @@
 package main
 
-func minOperations(nums []int, k int) int {
+import "math/bits"
+
+func minOperations1(nums []int, k int) int {
 	currentXOR := 0
 	for _, num := range nums {
 		currentXOR ^= num
@@ -18,4 +20,11 @@ func minOperations(nums []int, k int) int {
 	}
 
 	return operations
+}
+
+func minOperations(nums []int, k int) int {
+	for _, x := range nums {
+		k ^= x
+	}
+	return bits.OnesCount(uint(k))
 }
