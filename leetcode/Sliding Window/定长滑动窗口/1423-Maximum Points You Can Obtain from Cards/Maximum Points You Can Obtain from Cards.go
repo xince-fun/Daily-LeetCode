@@ -2,24 +2,24 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // 最小化剩下的牌总和 n - k
 func maxScore(cardPoints []int, k int) int {
 	ans := 0
-	sum, minSum := 0, math.MaxInt32
-	left, n := 0, len(cardPoints)
-	for right := 0; right < n; right++ {
-		sum += cardPoints[right]
-		for right-left > k {
-			sum -= cardPoints[left]
-			left++
-		}
+	sum := 0
+	n := len(cardPoints)
+	m := n - k
+	for _, p := range cardPoints[:m] {
+		sum += p
+	}
+	minSum := sum
+	for i := m; i < n; i++ {
+		sum += cardPoints[i] - cardPoints[i-m]
 		minSum = min(minSum, sum)
 	}
-	for i := 0; i < n; i++ {
-		ans += cardPoints[i]
+	for _, p := range cardPoints {
+		ans += p
 	}
 	return ans - minSum
 }
