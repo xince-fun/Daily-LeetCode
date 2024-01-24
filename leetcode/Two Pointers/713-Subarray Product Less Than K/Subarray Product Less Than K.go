@@ -20,6 +20,9 @@ func numSubarrayProductLessThanK1(nums []int, k int) int {
 }
 
 func numSubarrayProductLessThanK(nums []int, k int) int {
+	if k <= 1 {
+		return 0
+	}
 	ans := 0
 
 	left, product := 0, 1
