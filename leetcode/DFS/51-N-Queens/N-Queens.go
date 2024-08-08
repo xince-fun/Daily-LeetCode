@@ -65,7 +65,7 @@ func solveNQueens1(n int) (ans [][]string) {
 func solveNQueens(n int) (ans [][]string) {
 	col := make([]int, n)
 	onPath := make([]bool, n)
-	// 2*n-1为对角线的长度
+
 	diag1 := make([]bool, 2*n-1)
 	diag2 := make([]bool, 2*n-1)
 

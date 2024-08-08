@@ -28,8 +28,8 @@ func lowerBound2(nums []int, target int) int {
 }
 
 func lowerBound3(nums []int, target int) int {
-	left, right := -1, len(nums)-1 // (left, right)
-	for left+1 < right {
+	left, right := -1, len(nums) // (left, right)
+	for left < right {
 		mid := left + (right-left)/2
 		if nums[mid] < target { // (mid, right)
 			left = mid
@@ -37,7 +37,7 @@ func lowerBound3(nums []int, target int) int {
 			right = mid
 		}
 	}
-	return left
+	return right
 }
 
 // >= 既是这种

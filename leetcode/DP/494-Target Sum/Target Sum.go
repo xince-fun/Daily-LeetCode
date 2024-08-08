@@ -190,7 +190,7 @@ func findTargetSumWays3(nums []int, target int) int {
 			}
 		}
 	}
-	return f[n][target]
+	return f[n%2][target]
 }
 
 // 进一步优化

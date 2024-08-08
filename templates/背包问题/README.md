@@ -491,11 +491,8 @@ f 数组的初始化都改为 1
 		if memo[i][c] != -1 {
 			return memo[i][c]
 		}
-		if c < nums[i] {
-			memo[i][c] = dfs(i-1, c)
-		} else {
-			memo[i][c] = dfs(i-1, c) + dfs(i-1, c-nums[i])
-		}
+
+		memo[i][c] = dfs(i-1, c) + dfs(i-1, c-nums[i])
 		return memo[i][c]
 	}
 ```
@@ -506,9 +503,7 @@ f 数组的初始化都改为 1
 ```go
 	for _, num := range nums {
 		for c := target; c >= 0; c-- {
-			if c >= num {
-				f[c] = f[c] + f[c-num]
-			}
+			f[c] = f[c] + f[max(c-num, 0)]
 		}
 	}
 ```
