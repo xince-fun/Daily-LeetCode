@@ -19,7 +19,7 @@ func reverseKGroup1(head *ListNode, k int) *ListNode {
 		b = b.Next
 	}
 	newHead := reverse(a, b)
-	a.Next = reverseKGroup(b, k)
+	a.Next = reverseKGroup1(b, k)
 	return newHead
 }
 

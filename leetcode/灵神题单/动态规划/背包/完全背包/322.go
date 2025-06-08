@@ -128,3 +128,21 @@ func coinChange3(coins []int, amount int) int {
 	}
 	return -1
 }
+
+func coinChange(coins []int, amount int) int {
+	f := make([]int, amount+1)
+	for i := range f {
+		f[i] = math.MaxInt / 2
+	}
+	f[0] = 0
+	for _, num := range coins {
+		for c := num; c <= amount; c++ {
+			f[c] = min(f[c], f[c-num]+1)
+		}
+	}
+	ans := f[amount]
+	if ans < math.MaxInt/2 {
+		return ans
+	}
+	return -1
+}
